@@ -1,15 +1,23 @@
-# 🇹🇭 Thai Customer Feedback Analyzer
+# Thai Customer Feedback Analyzer
+
+<p align="center">
+  <img src="https://img.shields.io/badge/python-3.10%2B-blue?logo=python&logoColor=white" alt="Python"/>
+  <img src="https://img.shields.io/badge/Streamlit-FF4B4B?logo=streamlit&logoColor=white" alt="Streamlit"/>
+  <img src="https://img.shields.io/badge/PyTorch-EE4C2C?logo=pytorch&logoColor=white" alt="PyTorch"/>
+  <img src="https://img.shields.io/badge/HuggingFace-F9AB00?logo=huggingface&logoColor=white" alt="Hugging Face"/>
+  <img src="https://img.shields.io/badge/pandas-150458?logo=pandas&logoColor=white" alt="Pandas"/>
+</p>
 
 An automated Natural Language Processing (NLP) pipeline designed to classify customer sentiment and categorize common business issues from Thai text. The system features custom fine-tuned transformer models, a fast inference pipeline, and a modern, interactive Streamlit analytics dashboard.
 
-## 🌟 Features
+## Features
 
 - **Sentiment Classification**: Predicts `Positive`, `Neutral`, and `Negative` sentiment using the Wisesight Sentiment Corpus.
 - **Issue Classification**: Categorizes feedback into `Refund Request`, `Delivery Issue`, `Product Defect`, and `Product Question` using a custom annotated dataset.
 - **Fast Inference Pipeline**: Single predictions and scalable CSV batch processing.
 - **Premium Analytics Dashboard**: A glassmorphism-styled Streamlit UI with Plotly charts for interactive data visualization.
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Language**: Python 3.12+
 - **Foundation Model**: [WangchanBERTa](https://huggingface.co/airesearch/wangchanberta-base-att-spm-uncased) (PyThaiNLP/VISTEC)
@@ -18,7 +26,7 @@ An automated Natural Language Processing (NLP) pipeline designed to classify cus
 - **Dashboard & Visualization**: Streamlit, Plotly Express
 - **Experiment Tracking**: Weights & Biases (W&B)
 
-## 📂 Project Structure
+## Project Structure
 
 ```text
 thai-sentiment/
@@ -45,7 +53,7 @@ thai-sentiment/
 └── PRD.md                  # Product Requirements Document
 ```
 
-## 🚀 Installation & Setup
+## Installation & Setup
 
 1. **Clone the repository:**
    ```bash
@@ -65,7 +73,7 @@ thai-sentiment/
    wandb login
    ```
 
-## 🧠 Model Training
+## Model Training
 
 ### 1. Data Preparation
 To download the Wisesight corpus and generate the custom issue dataset:
@@ -85,7 +93,7 @@ Fine-tunes WangchanBERTa for specific business issue categorization (Target F1: 
 PYTHONPATH=. python3 src/train_issue.py
 ```
 
-## ⚡ Inference
+## Inference
 
 **Single Prediction:**
 ```bash
@@ -98,7 +106,7 @@ PYTHONPATH=. python3 src/predict_issue.py "ทำไมของยังไม�
 PYTHONPATH=. python3 src/batch_predict.py data/processed/input.csv data/processed/output.csv
 ```
 
-## 📊 Analytics Dashboard
+## Analytics Dashboard
 
 Launch the interactive UI to upload CSV files of customer reviews and view live, interactive charts:
 ```bash
@@ -106,5 +114,5 @@ PYTHONPATH=. python3 -m streamlit run src/dashboard.py
 ```
 > The dashboard will be hosted locally at `http://localhost:8501`.
 
-## 📜 License
+## License
 MIT License
