@@ -7,3 +7,5 @@ data/processed/
 wandb/
 *.zip
 .agents/
+plan.md
+PRD.md
