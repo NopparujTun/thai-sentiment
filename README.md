@@ -1,4 +1,4 @@
-# Thai Customer Feedback Analyzer
+# Thai Sentiment and Intent Pipeline
 
 <p align="center">
   <img src="https://img.shields.io/badge/python-3.10%2B-blue?logo=python&logoColor=white" alt="Python"/>
