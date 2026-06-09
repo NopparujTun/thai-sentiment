@@ -1,0 +1,14 @@
+model_name: "airesearch/wangchanberta-base-att-spm-uncased"
+data_path: "data/processed/wisesight_sentiment.csv"
+output_dir: "models/sentiment"
+max_length: 128
+batch_size: 16
+num_epochs: 3
+learning_rate: 2.0e-5
+weight_decay: 0.01
+warmup_steps: 100
+evaluation_strategy: "epoch"
+save_strategy: "epoch"
+logging_steps: 10
+wandb_project: "thai-customer-feedback-analyzer"
+wandb_run_name: "sentiment-classifier-v1"
