@@ -3,10 +3,10 @@ data_path: "data/processed/custom_issues.csv"
 output_dir: "models/issue"
 max_length: 128
 batch_size: 16
-num_epochs: 3
-learning_rate: 2.0e-5
+num_epochs: 8
+learning_rate: 3.0e-5
 weight_decay: 0.01
-warmup_steps: 50
+warmup_steps: 100
 evaluation_strategy: "epoch"
 save_strategy: "epoch"
 logging_steps: 10
