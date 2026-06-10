@@ -42,8 +42,8 @@ thai-sentiment/
 ├── src/                    # Source code
 │   ├── prepare_data.py     # Data generation & pipeline execution
 │   ├── preprocessing.py    # Text cleaning rules (URLs, whitespace)
-│   ├── train_sentiment.py  # Sentiment model training script
-│   ├── train_intent.py     # Intent model training script
+│   ├── train_sentiment.ipynb# Sentiment model training notebook
+│   ├── train_intent.ipynb  # Intent model training notebook
 │   ├── predict_sentiment.py# Single inference for sentiment
 │   ├── predict_intent.py   # Single inference for intents
 │   ├── batch_predict.py    # Batch CSV inference
@@ -84,13 +84,13 @@ PYTHONPATH=. python3 src/prepare_data.py
 ### 2. Train the Sentiment Model
 Fine-tunes WangchanBERTa for sentiment classification (Target F1: ≥ 85%).
 ```bash
-PYTHONPATH=. python3 src/train_sentiment.py
+jupyter notebook src/train_sentiment.ipynb
 ```
 
 ### 3. Train the Intent Classifier
 Fine-tunes WangchanBERTa for specific business intent categorization (Target F1: ≥ 80%).
 ```bash
-PYTHONPATH=. python3 src/train_intent.py
+jupyter notebook src/train_intent.ipynb
 ```
 
 ## Inference
