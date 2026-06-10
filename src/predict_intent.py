@@ -2,8 +2,8 @@ import torch
 import torch.nn.functional as F
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
-class IssuePredictor:
-    def __init__(self, model_path="models/issue"):
+class IntentPredictor:
+    def __init__(self, model_path="models/intent"):
         self.tokenizer = AutoTokenizer.from_pretrained(model_path)
         self.model = AutoModelForSequenceClassification.from_pretrained(model_path)
         self.model.eval()
@@ -23,13 +23,13 @@ class IssuePredictor:
         
         return self.id2label[label_id.item()], confidence.item()
 
-def predict_issue(text: str):
-    predictor = IssuePredictor()
+def predict_intent(text: str):
+    predictor = IntentPredictor()
     return predictor.predict(text)
 
 if __name__ == "__main__":
     import sys
     if len(sys.argv) > 1:
-        print(predict_issue(sys.argv[1]))
+        print(predict_intent(sys.argv[1]))
     else:
-        print(predict_issue("ของยังไม่ถึงเลย สั่งไปตั้งนานแล้ว"))
+        print(predict_intent("ของยังไม่ถึงเลย สั่งไปตั้งนานแล้ว"))

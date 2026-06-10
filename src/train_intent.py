@@ -25,7 +25,7 @@ def compute_metrics(pred):
         'recall': recall
     }
 
-def main(config_path="configs/issue.yaml"):
+def main(config_path="configs/intent.yaml"):
     with open(config_path, "r") as f:
         config = yaml.safe_load(f)
 

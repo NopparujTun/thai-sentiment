@@ -9,7 +9,7 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from src.predict_sentiment import SentimentPredictor
-from src.predict_issue import IssuePredictor
+from src.predict_intent import IntentPredictor
 
 # Page config
 st.set_page_config(page_title="Thai Customer Feedback Analyzer", layout="wide", page_icon="🇹🇭")
@@ -74,10 +74,10 @@ st.markdown("""
 
 @st.cache_resource
 def load_models():
-    return SentimentPredictor(), IssuePredictor()
+    return SentimentPredictor(), IntentPredictor()
 
 st.title("✨ Thai Customer Feedback Analyzer")
-st.markdown("**Automated NLP pipeline for classifying sentiment and issue categories from Thai text.**")
+st.markdown("**Automated NLP pipeline for classifying sentiment and intent categories from Thai text.**")
 
 uploaded_file = st.file_uploader("Upload CSV containing customer reviews", type="csv")
 
@@ -105,7 +105,7 @@ if uploaded_file is not None:
         
         if st.button("🚀 Run Analysis", use_container_width=True):
             with st.spinner("Loading NLP Models (WangchanBERTa)..."):
-                sentiment_predictor, issue_predictor = load_models()
+                sentiment_predictor, intent_predictor = load_models()
                 
             progress_bar = st.progress(0)
             status_text = st.empty()
@@ -116,11 +116,11 @@ if uploaded_file is not None:
             
             for i, text in enumerate(df[text_col]):
                 if pd.isna(text):
-                    results.append({"review_text": text, "sentiment": "Unknown", "sentiment_score": 0.0, "issue": "Unknown", "issue_score": 0.0})
+                    results.append({"review_text": text, "sentiment": "Unknown", "sentiment_score": 0.0, "intent": "Unknown", "intent_score": 0.0})
                 else:
                     s_label, s_score = sentiment_predictor.predict(str(text))
-                    i_label, i_score = issue_predictor.predict(str(text))
-                    results.append({"review_text": text, "sentiment": s_label, "sentiment_score": s_score, "issue": i_label, "issue_score": i_score})
+                    i_label, i_score = intent_predictor.predict(str(text))
+                    results.append({"review_text": text, "sentiment": s_label, "sentiment_score": s_score, "intent": i_label, "intent_score": i_score})
                 
                 # Update progress smoothly
                 if i % 10 == 0 or i == total_rows - 1:
@@ -145,8 +145,8 @@ if uploaded_file is not None:
                 neg_count = len(out_df[out_df["sentiment"] == "Negative"])
                 st.markdown(f'<div class="metric-card"><div class="metric-value" style="color:#FF6B6B;">{neg_count:,}</div><div class="metric-label">Negative Reviews</div></div>', unsafe_allow_html=True)
             with col3:
-                most_common_issue = out_df["issue"].mode()[0] if not out_df["issue"].empty else "N/A"
-                st.markdown(f'<div class="metric-card"><div class="metric-value" style="font-size: 2rem; padding-top: 15px;">{most_common_issue}</div><div class="metric-label">Top Issue</div></div>', unsafe_allow_html=True)
+                most_common_intent = out_df["intent"].mode()[0] if not out_df["intent"].empty else "N/A"
+                st.markdown(f'<div class="metric-card"><div class="metric-value" style="font-size: 2rem; padding-top: 15px;">{most_common_intent}</div><div class="metric-label">Top Intent</div></div>', unsafe_allow_html=True)
                 
             st.markdown("<br>", unsafe_allow_html=True)
             
@@ -166,13 +166,13 @@ if uploaded_file is not None:
                 st.plotly_chart(fig_sent, use_container_width=True)
                 
             with chart_col2:
-                # Issue Distribution
-                issue_counts = out_df["issue"].value_counts().reset_index()
-                issue_counts.columns = ["Issue", "Count"]
-                fig_issue = px.bar(issue_counts, x="Count", y="Issue", title="Issue Categories Breakdown", orientation='h',
-                                  color="Issue", color_discrete_sequence=px.colors.qualitative.Pastel)
-                fig_issue.update_layout(paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)", font=dict(color="#FFF"), showlegend=False)
-                st.plotly_chart(fig_issue, use_container_width=True)
+                # Intent Distribution
+                intent_counts = out_df["intent"].value_counts().reset_index()
+                intent_counts.columns = ["Intent", "Count"]
+                fig_intent = px.bar(intent_counts, x="Count", y="Intent", title="Intent Categories Breakdown", orientation='h',
+                                  color="Intent", color_discrete_sequence=px.colors.qualitative.Pastel)
+                fig_intent.update_layout(paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)", font=dict(color="#FFF"), showlegend=False)
+                st.plotly_chart(fig_intent, use_container_width=True)
                 
             st.subheader("📋 Predicted Data")
             st.dataframe(out_df, use_container_width=True)

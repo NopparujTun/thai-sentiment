@@ -31,8 +31,8 @@ def prepare_wisesight():
     cleaned_df.to_csv("data/processed/wisesight_sentiment.csv", index=False)
     print(f"Wisesight dataset prepared: {len(cleaned_df)} rows.")
 
-def generate_issue_dataset():
-    print("Generating custom Thai issue dataset...")
+def generate_intent_dataset():
+    print("Generating custom Thai intent dataset...")
     # Generate mock data for 4 classes: Delivery Issue, Product Defect, Product Question, Refund Request
     # 350 samples each
     classes = ["Delivery Issue", "Product Defect", "Product Question", "Refund Request"]
@@ -88,15 +88,15 @@ def generate_issue_dataset():
     df.loc[200, "text"] = ""
     
     # Save raw
-    df.to_csv("data/raw/custom_issues.csv", index=False)
+    df.to_csv("data/raw/custom_intents.csv", index=False)
     
     # Clean and save processed
     cleaned_df = clean_data(df, 'text')
-    cleaned_df.to_csv("data/processed/custom_issues.csv", index=False)
-    print(f"Custom issue dataset prepared: {len(cleaned_df)} rows.")
+    cleaned_df.to_csv("data/processed/custom_intents.csv", index=False)
+    print(f"Custom intent dataset prepared: {len(cleaned_df)} rows.")
 
 if __name__ == "__main__":
     os.makedirs("data/raw", exist_ok=True)
     os.makedirs("data/processed", exist_ok=True)
     prepare_wisesight()
-    generate_issue_dataset()
+    generate_intent_dataset()

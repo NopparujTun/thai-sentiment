@@ -1,6 +1,6 @@
 model_name: "airesearch/wangchanberta-base-att-spm-uncased"
-data_path: "data/processed/custom_issues.csv"
-output_dir: "models/issue"
+data_path: "data/processed/custom_intents.csv"
+output_dir: "models/intent"
 max_length: 128
 batch_size: 16
 num_epochs: 8
@@ -11,4 +11,4 @@ evaluation_strategy: "epoch"
 save_strategy: "epoch"
 logging_steps: 10
 wandb_project: "thai-customer-feedback-analyzer"
-wandb_run_name: "issue-classifier-v1"
+wandb_run_name: "intent-classifier-v1"

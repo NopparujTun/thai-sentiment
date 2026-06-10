@@ -11,9 +11,9 @@ client = OpenAI(
 
 classes = ["Refund Request", "Delivery Issue", "Product Defect", "Product Question"]
 
-def generate_samples(issue_class, count=50):
+def generate_samples(intent_class, count=50):
     prompt = f"""
-    Generate exactly {count} distinct, highly realistic Thai customer reviews/complaints that fall under the category: "{issue_class}".
+    Generate exactly {count} distinct, highly realistic Thai customer reviews/complaints that fall under the category: "{intent_class}".
     
     CRITICAL Requirements:
     - Use authentic, everyday Thai language (spoken style, slang, typos, missing vowels, intense emotions).
@@ -55,7 +55,7 @@ def generate_samples(issue_class, count=50):
                 
         return cleaned
     except Exception as e:
-        print(f"Error generating for {issue_class}: {e}")
+        print(f"Error generating for {intent_class}: {e}")
         return []
 
 def main():
@@ -80,7 +80,7 @@ def main():
     df = df.sample(frac=1).reset_index(drop=True)
     
     # Save the augmented dataset, overwriting the old template-based one
-    output_path = "data/processed/custom_issues.csv"
+    output_path = "data/processed/custom_intents.csv"
     df.to_csv(output_path, index=False)
     print(f"Success! Saved {len(df)} diverse samples to {output_path}!")
 

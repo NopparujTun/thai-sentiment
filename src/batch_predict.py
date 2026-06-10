@@ -2,7 +2,7 @@ import pandas as pd
 import sys
 import time
 from src.predict_sentiment import SentimentPredictor
-from src.predict_issue import IssuePredictor
+from src.predict_intent import IntentPredictor
 
 def batch_predict(input_csv: str, output_csv: str):
     print(f"Loading data from {input_csv}...")
@@ -19,7 +19,7 @@ def batch_predict(input_csv: str, output_csv: str):
 
     print("Loading models...")
     sentiment_predictor = SentimentPredictor()
-    issue_predictor = IssuePredictor()
+    intent_predictor = IntentPredictor()
     
     print("Running predictions...")
     start_time = time.time()
@@ -31,20 +31,20 @@ def batch_predict(input_csv: str, output_csv: str):
                 "review_text": text,
                 "sentiment": None,
                 "sentiment_score": None,
-                "issue": None,
-                "issue_score": None
+                "intent": None,
+                "intent_score": None
             })
             continue
             
         s_label, s_score = sentiment_predictor.predict(str(text))
-        i_label, i_score = issue_predictor.predict(str(text))
+        i_label, i_score = intent_predictor.predict(str(text))
         
         results.append({
             "review_text": text,
             "sentiment": s_label,
             "sentiment_score": s_score,
-            "issue": i_label,
-            "issue_score": i_score
+            "intent": i_label,
+            "intent_score": i_score
         })
         
     out_df = pd.DataFrame(results)

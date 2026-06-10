@@ -8,12 +8,12 @@
   <img src="https://img.shields.io/badge/pandas-150458?logo=pandas&logoColor=white" alt="Pandas"/>
 </p>
 
-An automated Natural Language Processing (NLP) pipeline designed to classify customer sentiment and categorize common business issues from Thai text. The system features custom fine-tuned transformer models, a fast inference pipeline, and a modern, interactive Streamlit analytics dashboard.
+An automated Natural Language Processing (NLP) pipeline designed to classify customer sentiment and categorize common business intents from Thai text. The system features custom fine-tuned transformer models, a fast inference pipeline, and a modern, interactive Streamlit analytics dashboard.
 
 ## Features
 
 - **Sentiment Classification**: Predicts `Positive`, `Neutral`, and `Negative` sentiment using the Wisesight Sentiment Corpus.
-- **Issue Classification**: Categorizes feedback into `Refund Request`, `Delivery Issue`, `Product Defect`, and `Product Question` using a custom annotated dataset.
+- **Intent Classification**: Categorizes feedback into `Refund Request`, `Delivery Issue`, `Product Defect`, and `Product Question` using a custom annotated dataset.
 - **Fast Inference Pipeline**: Single predictions and scalable CSV batch processing.
 - **Premium Analytics Dashboard**: A glassmorphism-styled Streamlit UI with Plotly charts for interactive data visualization.
 
@@ -32,20 +32,20 @@ An automated Natural Language Processing (NLP) pipeline designed to classify cus
 thai-sentiment/
 ├── configs/                # Hyperparameter configurations for training (YAML)
 │   ├── sentiment.yaml
-│   └── issue.yaml
+│   └── intent.yaml
 ├── data/                   # Datasets
 │   ├── raw/                # Raw datasets (git-ignored)
 │   └── processed/          # Cleaned CSV files ready for training (git-ignored)
 ├── models/                 # Fine-tuned WangchanBERTa checkpoints (git-ignored)
 │   ├── sentiment/
-│   └── issue/
+│   └── intent/
 ├── src/                    # Source code
 │   ├── prepare_data.py     # Data generation & pipeline execution
 │   ├── preprocessing.py    # Text cleaning rules (URLs, whitespace)
 │   ├── train_sentiment.py  # Sentiment model training script
-│   ├── train_issue.py      # Issue model training script
+│   ├── train_intent.py     # Intent model training script
 │   ├── predict_sentiment.py# Single inference for sentiment
-│   ├── predict_issue.py    # Single inference for issues
+│   ├── predict_intent.py   # Single inference for intents
 │   ├── batch_predict.py    # Batch CSV inference
 │   └── dashboard.py        # Streamlit analytics dashboard UI
 ├── tests/                  # Unit tests (pytest)
@@ -76,7 +76,7 @@ thai-sentiment/
 ## Model Training
 
 ### 1. Data Preparation
-To download the Wisesight corpus and generate the custom issue dataset:
+To download the Wisesight corpus and generate the custom intent dataset:
 ```bash
 PYTHONPATH=. python3 src/prepare_data.py
 ```
@@ -87,10 +87,10 @@ Fine-tunes WangchanBERTa for sentiment classification (Target F1: ≥ 85%).
 PYTHONPATH=. python3 src/train_sentiment.py
 ```
 
-### 3. Train the Issue Classifier
-Fine-tunes WangchanBERTa for specific business issue categorization (Target F1: ≥ 80%).
+### 3. Train the Intent Classifier
+Fine-tunes WangchanBERTa for specific business intent categorization (Target F1: ≥ 80%).
 ```bash
-PYTHONPATH=. python3 src/train_issue.py
+PYTHONPATH=. python3 src/train_intent.py
 ```
 
 ## Inference
@@ -98,7 +98,7 @@ PYTHONPATH=. python3 src/train_issue.py
 **Single Prediction:**
 ```bash
 PYTHONPATH=. python3 src/predict_sentiment.py "สินค้าดีมาก ชอบมาก"
-PYTHONPATH=. python3 src/predict_issue.py "ทำไมของยังไม่ถึง"
+PYTHONPATH=. python3 src/predict_intent.py "ทำไมของยังไม่ถึง"
 ```
 
 **Batch CSV Prediction:**
