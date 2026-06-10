@@ -39,6 +39,8 @@ thai-sentiment/
 ├── models/                 # Fine-tuned WangchanBERTa checkpoints (git-ignored)
 │   ├── sentiment/
 │   └── intent/
+├── notebooks/              # Jupyter notebooks for data exploration
+│   └── EDA.ipynb           # Exploratory Data Analysis
 ├── src/                    # Source code
 │   ├── app/                # Streamlit UI
 │   │   └── dashboard.py
