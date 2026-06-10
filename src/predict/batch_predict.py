@@ -1,8 +1,8 @@
 import pandas as pd
 import sys
 import time
-from src.predict_sentiment import SentimentPredictor
-from src.predict_intent import IntentPredictor
+from src.predict.predict_sentiment import SentimentPredictor
+from src.predict.predict_intent import IntentPredictor
 
 def batch_predict(input_csv: str, output_csv: str):
     print(f"Loading data from {input_csv}...")

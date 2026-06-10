@@ -2,7 +2,7 @@ import pandas as pd
 import random
 import os
 from datasets import load_dataset
-from src.preprocessing import clean_data
+from src.pipeline.preprocessing import clean_data
 
 def prepare_wisesight():
     print("Preparing Wisesight dataset...")

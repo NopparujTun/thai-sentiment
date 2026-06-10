@@ -8,8 +8,8 @@ import os
 # Add the project root to sys.path so we can import src modules
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from src.predict_sentiment import SentimentPredictor
-from src.predict_intent import IntentPredictor
+from src.predict.predict_sentiment import SentimentPredictor
+from src.predict.predict_intent import IntentPredictor
 
 # Page config
 st.set_page_config(page_title="Thai Customer Feedback Analyzer", layout="wide", page_icon="🇹🇭")

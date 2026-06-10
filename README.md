@@ -40,14 +40,18 @@ thai-sentiment/
 │   ├── sentiment/
 │   └── intent/
 ├── src/                    # Source code
-│   ├── prepare_data.py     # Data generation & pipeline execution
-│   ├── preprocessing.py    # Text cleaning rules (URLs, whitespace)
-│   ├── train_sentiment.ipynb# Sentiment model training notebook
-│   ├── train_intent.ipynb  # Intent model training notebook
-│   ├── predict_sentiment.py# Single inference for sentiment
-│   ├── predict_intent.py   # Single inference for intents
-│   ├── batch_predict.py    # Batch CSV inference
-│   └── dashboard.py        # Streamlit analytics dashboard UI
+│   ├── app/                # Streamlit UI
+│   │   └── dashboard.py
+│   ├── pipeline/           # Data prep and training
+│   │   ├── augment_data.py
+│   │   ├── prepare_data.py
+│   │   ├── preprocessing.py
+│   │   ├── train_intent.ipynb
+│   │   └── train_sentiment.ipynb
+│   └── predict/            # Inference scripts
+│       ├── batch_predict.py
+│       ├── predict_intent.py
+│       └── predict_sentiment.py
 ├── tests/                  # Unit tests (pytest)
 ├── plan.md                 # Original project execution plan
 └── PRD.md                  # Product Requirements Document
@@ -78,39 +82,39 @@ thai-sentiment/
 ### 1. Data Preparation
 To download the Wisesight corpus and generate the custom intent dataset:
 ```bash
-PYTHONPATH=. python3 src/prepare_data.py
+PYTHONPATH=. python3 src/pipeline/prepare_data.py
 ```
 
 ### 2. Train the Sentiment Model
 Fine-tunes WangchanBERTa for sentiment classification (Target F1: ≥ 85%).
 ```bash
-jupyter notebook src/train_sentiment.ipynb
+jupyter notebook src/pipeline/train_sentiment.ipynb
 ```
 
 ### 3. Train the Intent Classifier
 Fine-tunes WangchanBERTa for specific business intent categorization (Target F1: ≥ 80%).
 ```bash
-jupyter notebook src/train_intent.ipynb
+jupyter notebook src/pipeline/train_intent.ipynb
 ```
 
 ## Inference
 
 **Single Prediction:**
 ```bash
-PYTHONPATH=. python3 src/predict_sentiment.py "สินค้าดีมาก ชอบมาก"
-PYTHONPATH=. python3 src/predict_intent.py "ทำไมของยังไม่ถึง"
+PYTHONPATH=. python3 src/predict/predict_sentiment.py "สินค้าดีมาก ชอบมาก"
+PYTHONPATH=. python3 src/predict/predict_intent.py "ทำไมของยังไม่ถึง"
 ```
 
 **Batch CSV Prediction:**
 ```bash
-PYTHONPATH=. python3 src/batch_predict.py data/processed/input.csv data/processed/output.csv
+PYTHONPATH=. python3 src/predict/batch_predict.py data/processed/input.csv data/processed/output.csv
 ```
 
 ## Analytics Dashboard
 
 Launch the interactive UI to upload CSV files of customer reviews and view live, interactive charts:
 ```bash
-PYTHONPATH=. python3 -m streamlit run src/dashboard.py
+PYTHONPATH=. python3 -m streamlit run src/app/dashboard.py
 ```
 > The dashboard will be hosted locally at `http://localhost:8501`.
 
